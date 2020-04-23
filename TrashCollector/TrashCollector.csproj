@@ -16,4 +16,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Employees\" />
+  </ItemGroup>
+
 </Project>
