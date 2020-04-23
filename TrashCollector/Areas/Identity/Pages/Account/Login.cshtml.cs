@@ -11,23 +11,28 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using TrashCollector.Data;
 
 namespace TrashCollector.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -52,6 +57,7 @@ namespace TrashCollector.Areas.Identity.Pages.Account
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+            public string Role { get; internal set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -74,7 +80,8 @@ namespace TrashCollector.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -83,7 +90,16 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    await _signInManager.SignInAsync(customer.IdentityUser, isPersistent: false);
+                    if (customer.IdentityUserId == "Customer")
+                    {
+                        return RedirectToAction("Index", "Customer");
+                    }
+                    else if (customer.IdentityUserId == "Employee")
+                    {
+                        return RedirectToAction("Index", "Employee");
+                    }
+                    
                 }
                 if (result.RequiresTwoFactor)
                 {

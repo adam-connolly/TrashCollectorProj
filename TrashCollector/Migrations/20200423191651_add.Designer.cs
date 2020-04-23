@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200423155613_Initial")]
-    partial class Initial
+    [Migration("20200423191651_add")]
+    partial class add
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e6d387aa-89f6-4921-9efe-bcbb5e4a4fc8",
-                            ConcurrencyStamp = "0c53a27e-c092-4172-a0bc-4f17ff5a84a8",
+                            Id = "bfd25a86-c81d-4551-a875-b679a7633ae7",
+                            ConcurrencyStamp = "c95177f9-c3e4-4507-8385-1a3aef8dcbdf",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "c79c78c4-34ff-4905-babf-4b3a350bf067",
-                            ConcurrencyStamp = "a42a952e-276c-475d-95e2-5dd96d17c3c1",
+                            Id = "5d904c32-89a8-4753-9ca5-91fab99f2a9b",
+                            ConcurrencyStamp = "55da3b1e-ab6c-429f-89f9-4df321c31982",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -265,7 +265,7 @@ namespace TrashCollector.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("TrashCollector.Models.Employee", b =>
@@ -300,7 +300,7 @@ namespace TrashCollector.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

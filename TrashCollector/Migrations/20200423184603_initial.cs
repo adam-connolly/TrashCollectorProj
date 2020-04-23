@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollector.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,7 +153,7 @@ namespace TrashCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -168,9 +168,9 @@ namespace TrashCollector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customer_AspNetUsers_IdentityUserId",
+                        name: "FK_Customers_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -178,7 +178,7 @@ namespace TrashCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -193,9 +193,9 @@ namespace TrashCollector.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employee_AspNetUsers_IdentityUserId",
+                        name: "FK_Employees_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -205,12 +205,12 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e6d387aa-89f6-4921-9efe-bcbb5e4a4fc8", "0c53a27e-c092-4172-a0bc-4f17ff5a84a8", "Customer", "CUSTOMER" });
+                values: new object[] { "834e72fa-5280-4d9b-9f15-06520047a439", "d04113df-5c3a-4bd1-a2ac-612a2e63899a", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c79c78c4-34ff-4905-babf-4b3a350bf067", "a42a952e-276c-475d-95e2-5dd96d17c3c1", "Employee", "EMPLOYEE" });
+                values: new object[] { "578672c8-961f-465e-a7f1-766f7abffd9b", "61086ac7-4d8c-41b4-a628-7d52e3a0422f", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -252,13 +252,13 @@ namespace TrashCollector.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_IdentityUserId",
-                table: "Customer",
+                name: "IX_Customers_IdentityUserId",
+                table: "Customers",
                 column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_IdentityUserId",
-                table: "Employee",
+                name: "IX_Employees_IdentityUserId",
+                table: "Employees",
                 column: "IdentityUserId");
         }
 
@@ -280,10 +280,10 @@ namespace TrashCollector.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
