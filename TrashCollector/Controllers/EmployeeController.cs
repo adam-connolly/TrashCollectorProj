@@ -23,12 +23,12 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            var applicationDbContext = _context.Customers.Where(c => c.ZipCode == employee.ZipCode);
-            return View(await applicationDbContext.ToListAsync());
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            employee.TerritoryCustomers = _context.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+            return View(employee.TerritoryCustomers);
         }
 
         // GET: Employees/Details/5
@@ -62,10 +62,12 @@ namespace TrashCollector.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                employee.IdentityUserId = userId;                
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

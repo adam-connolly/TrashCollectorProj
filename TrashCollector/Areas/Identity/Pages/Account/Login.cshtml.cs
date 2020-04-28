@@ -80,8 +80,8 @@ namespace TrashCollector.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            
+            //var user = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -89,17 +89,12 @@ namespace TrashCollector.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    await _signInManager.SignInAsync(customer.IdentityUser, isPersistent: false);
-                    if (customer.IdentityUserId == "Customer")
-                    {
-                        return RedirectToAction("Index", "Customer");
-                    }
-                    else if (customer.IdentityUserId == "Employee")
-                    {
-                        return RedirectToAction("Index", "Employee");
-                    }
+                   
+                        _logger.LogInformation("User logged in.");
+
+                        return LocalRedirect(returnUrl);
                     
+
                 }
                 if (result.RequiresTwoFactor)
                 {
