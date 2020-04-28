@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrashCollector.Migrations
@@ -162,6 +164,7 @@ namespace TrashCollector.Migrations
                     LastName = table.Column<string>(nullable: true),
                     AddressLine1 = table.Column<string>(nullable: true),
                     AddressLine2 = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     ZipCode = table.Column<int>(nullable: false),
                     IdentityUserId = table.Column<string>(nullable: true)
@@ -205,12 +208,12 @@ namespace TrashCollector.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "834e72fa-5280-4d9b-9f15-06520047a439", "d04113df-5c3a-4bd1-a2ac-612a2e63899a", "Customer", "CUSTOMER" });
+                values: new object[] { "e3da8470-1347-4179-a9db-32deed908c56", "fb2f4579-5220-41f6-b0c5-e0a9a87e2e3f", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "578672c8-961f-465e-a7f1-766f7abffd9b", "61086ac7-4d8c-41b4-a628-7d52e3a0422f", "Employee", "EMPLOYEE" });
+                values: new object[] { "5d74ea1a-b683-44ab-89b7-d324332b2866", "cebdd404-05ed-4ccf-9676-739c6afbaa0d", "Employee", "EMPLOYEE" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

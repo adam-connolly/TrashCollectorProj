@@ -10,8 +10,8 @@ using TrashCollector.Data;
 namespace TrashCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200423191651_add")]
-    partial class add
+    [Migration("20200428203635_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,15 +50,15 @@ namespace TrashCollector.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bfd25a86-c81d-4551-a875-b679a7633ae7",
-                            ConcurrencyStamp = "c95177f9-c3e4-4507-8385-1a3aef8dcbdf",
+                            Id = "e3da8470-1347-4179-a9db-32deed908c56",
+                            ConcurrencyStamp = "fb2f4579-5220-41f6-b0c5-e0a9a87e2e3f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "5d904c32-89a8-4753-9ca5-91fab99f2a9b",
-                            ConcurrencyStamp = "55da3b1e-ab6c-429f-89f9-4df321c31982",
+                            Id = "5d74ea1a-b683-44ab-89b7-d324332b2866",
+                            ConcurrencyStamp = "cebdd404-05ed-4ccf-9676-739c6afbaa0d",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -244,6 +244,9 @@ namespace TrashCollector.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
